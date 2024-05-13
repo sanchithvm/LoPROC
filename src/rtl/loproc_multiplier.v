@@ -52,7 +52,7 @@ module loproc_multiplier(
 		if(mul_rst) begin
 			acc_enable <= 1'b0;
 		end
-		else if(valid_in) begin
+		else if(valid_in & (in1 != 'h0) & (in2 != 'h0)) begin
 			acc_enable <= 1'b1;
 		end
 		else if(to_fb_sel_mux ==  'h0) begin
@@ -70,7 +70,8 @@ module loproc_multiplier(
 	always @ (posedge mul_clk or posedge mul_rst) begin
 		if (mul_rst) begin
 			enc_reg <= 32'h0;
-		end else begin
+		end
+		else begin
 			enc_reg <= to_enc_register;
 		end
 	end
@@ -82,7 +83,7 @@ module loproc_multiplier(
 	prencoder_32_5 priority_encoder_inst(enc_reg, to_shifter);
 	decoder_5_32 decoder_inst(to_shifter, from_dec);
 
-	assign to_fb_sel_mux = enc_reg & ~from_dec;
+	assign to_fb_sel_mux = acc_enable? enc_reg & ~from_dec : 1'b0;
 
 	//Stage 2: Shifting
 	wire [`DATA_WIDTH-1:0] shifter_out_l, shifter_out_h;
@@ -112,11 +113,14 @@ module loproc_multiplier(
 */
 	//Valid out register
 	always@(posedge mul_clk or posedge mul_rst) begin
-		if(mul_rst | ~acc_enable) begin
+		if(mul_rst) begin
 			valid_out <= 1'b0;
 		end
 		else if(valid_out) begin
 			valid_out <= 1'b0;
+		end
+		else if(valid_in & (in1 == 'h0 || in2 == 'h0)) begin
+			valid_out <= 1'b1;
 		end
 		else if((to_fb_sel_mux=='h0) & acc_enable) begin
 			valid_out <= 1'b1;

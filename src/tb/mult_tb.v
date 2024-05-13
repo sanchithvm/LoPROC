@@ -24,7 +24,7 @@ initial begin
 	$dumpvars;
 	clk <= 0; rst <= 0;
 	valid_in <= 0; in1 <= 'h0; in2 <= 'h0;
-	#5 rst <= 1;
+	#4.5 rst <= 1;
 	#10 rst <= 0;	
 	#10 in1 <= 'h4bba; in2 <= 'h100b;valid_in<= 1;
 	#10 valid_in <= 0;
@@ -32,6 +32,11 @@ initial begin
 
 	#100 in1 <= 'hff00_bff1; in2 <= 'hff11_9956; valid_in <= 1;
 	#10 valid_in <= 0;
+	
+	#200 in1 <= 0; valid_in <= 1'b1;
+	#10 valid_in <= 1'b0;
+	#50 in1 <= 'h478; in2 <= 'h0; valid_in <= 1'b1;
+	#10 valid_in <= 1'b0;
 	$display("done");
 	#500 $finish;
 end

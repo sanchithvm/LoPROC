@@ -1,0 +1,5 @@
+/home/sanchith/documents/loproc_clone/src/tb/mult_tb.v
+/home/sanchith/documents/loproc_clone/src/rtl/loproc_multiplier.v
+/home/sanchith/documents/loproc_clone/src/rtl/loproc_defines.vh
+/home/sanchith/documents/loproc_clone/src/rtl/prencoder_32_5.v
+/home/sanchith/documents/loproc_clone/src/rtl/decoder_5_32.v

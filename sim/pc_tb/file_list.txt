@@ -1,0 +1,3 @@
+/home/sanchith/documents/loproc_clone/src/tb/pc_tb.v
+/home/sanchith/documents/loproc_clone/src/rtl/loproc_pc.v
+/home/sanchith/documents/loproc_clone/src/rtl/loproc_defines.vh

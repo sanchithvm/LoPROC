@@ -21,6 +21,7 @@
 `define DATA_WIDTH            32
 `define INSTRUCTION_WIDTH     32
 `define REG_BANK_DEPTH        32
+`define REG_BANK_ADDR_WIDTH   5
 `define DATA_LOG2             5
 `define POWER_MODES           4
 `define POWER_MODES_LOG2      2  
